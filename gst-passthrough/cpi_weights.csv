@@ -1,0 +1,29 @@
+level,division,group,weight_2019base_per10000,weight_2024base_per10000
+division,FOOD,,2117,2042
+division,CLOTHING & FOOTWEAR,,212,165
+division,HOUSING & UTILITIES,,2485,2938
+division,HOUSEHOLD DURABLES & SERVICES,,488,547
+division,HEALTH,,651,1008
+division,TRANSPORT,,1709,1307
+division,INFORMATION & COMMUNICATION,,477,381
+division,"RECREATION, SPORT & CULTURE",,714,595
+division,EDUCATION,,670,579
+division,MISCELLANEOUS GOODS & SERVICES,,477,438
+division,ALL ITEMS,,10000,10000
+group,HOUSING & UTILITIES,Accommodation,2198,2656
+group,HOUSING & UTILITIES,Actual Rentals for Housing,228,294
+group,HOUSING & UTILITIES,Imputed Rentals for Housing,1750,2138
+group,HOUSING & UTILITIES,Housing Maintenance & Repairs,220,224
+group,HOUSING & UTILITIES,Utilities & Other Fuels,287,282
+group,HEALTH,Medicines & Health Products,116,94
+group,HEALTH,Outpatient Care Services,274,428
+group,HEALTH,Inpatient Care Services,151,238
+group,HEALTH,Other Health Services,28,23
+group,HEALTH,Health Insurance,82,225
+group,EDUCATION,"General, Vocational & Higher Education",466,391
+group,EDUCATION,Private Tuition & Other Educational Courses,196,184
+group,EDUCATION,School Textbooks & Study Guides,8,4
+group,TRANSPORT,Private Transport,1221,906
+group,TRANSPORT,Land Transport Services,310,262
+group,TRANSPORT,Other Transport Services,174,131
+group,TRANSPORT,Transport Services of Goods,4,8

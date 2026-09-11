@@ -1,0 +1,20 @@
+date,event,cpi_categories_affected,relation_to_design,evidence_status,source
+1994-04-01,GST introduced at 3 per cent,all GST-liable,pre-sample context,PRIMARY,MOF Goods and Services Tax policy page
+2003-01-01,GST raised 3 to 4 per cent,all GST-liable,event 1,PRIMARY,MOF Goods and Services Tax policy page
+2003-03-01,SARS outbreak begins affecting Singapore,transport recreation food services,confound for event 1,NOT YET SOURCED,pending
+2004-01-01,GST raised 4 to 5 per cent,all GST-liable,event 2,PRIMARY,MOF Goods and Services Tax policy page
+2007-07-01,GST raised 5 to 7 per cent,all GST-liable,event 3 and method test,PRIMARY,MOF policy page for year; exact date SECONDARY pending statute check
+2007-07-01,GST offset package of about 4 billion dollars over five years,household incomes not prices,confound for event 3 via demand,SECONDARY,Wikipedia citing CNA 15 February 2007
+2022-01-01,Rental market begins sharp rise continuing through 2023,accommodation,invalidates exempt control group,NOT YET QUANTIFIED,pending CPI file
+2022-12-01,Public transport fare revision takes effect,transport,contaminates December 2022 baseline,NOT YET SOURCED,PTC Fare Review Exercise 2022
+2023-01-01,GST raised 7 to 8 per cent,all GST-liable,event 4,PRIMARY,MOF Goods and Services Tax policy page
+2023-01-01,CDC vouchers issued to all households,food services retail,demand shock same month as event 4,NOT YET SOURCED,pending
+2023-02-06,MTI reply: CAP received 286 feedback submissions 1 Apr 2022 to 31 Jan 2023; 26 alleged GST misrepresentation,not a price series,corroborating evidence on over-shifting,PRIMARY,MTI written reply to PQ 6 February 2023 Gan Kim Yong
+2023-02-14,Budget 2023 raises tobacco excise,alcoholic beverages and tobacco,confound one month after event 4,NOT YET SOURCED,pending
+2023-12-23,Public transport fare increase takes effect,transport,contaminates December 2023 baseline,SECONDARY,PTC 2023 fare review; date via Mothership pending PTC confirmation
+2024-01-01,GST raised 8 to 9 per cent,all GST-liable,event 5,PRIMARY,MOF Goods and Services Tax policy page
+2024-01-01,Carbon tax raised from 5 to 25 dollars per tonne,electricity gas,confound same month as event 5,SECONDARY,NCCS carbon tax page pending direct quote
+2024-01-01,SP Group household electricity tariff up 4.1 per cent quarter on quarter,electricity,confound same month as event 5,PRIMARY,SP Group media release 29 December 2023
+2024-01-01,CDC vouchers issued to all households,food services retail,demand shock same month as event 5,NOT YET SOURCED,pending
+2024-02-05,MTI reply: CAP saw no significant increase in feedback in January 2024,not a price series,corroborating evidence on over-shifting,PRIMARY,MTI written reply to PQ 5 February 2024 Gan Kim Yong
+2025-01-01,CPI rebased to 2024 equals 100 using HES 2023 weights,all,possible composition break; month of effect UNRESOLVED,UNRESOLVED,SingStat ip-e61 not yet retrieved

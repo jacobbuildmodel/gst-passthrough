@@ -1,0 +1,63 @@
+number_in_prose,value,basis,source_type,source,script_or_file,status
+GST rate 7 to 8 per cent from 1 January 2023,7% to 8%,statutory,PRIMARY,MOF Goods and Services Tax policy page,SOURCES.md item 1,VERIFIED
+GST rate 8 to 9 per cent from 1 January 2024,8% to 9%,statutory,PRIMARY,MOF Goods and Services Tax policy page,SOURCES.md item 1,VERIFIED
+Official GST contribution about one percentage point,1.0 pp,implied by difference of published forecast bands,PRIMARY,MAS MPS 14 Apr 2023 and MTI CPD Jan 2024,SOURCES.md items 11 and 18,VERIFIED
+January 2023 headline inflation,6.6% year on year,2019=100 basis as published,PRIMARY,MTI CPD Jan 2023,05_verify.py reproduces 6.638 from the file,VERIFIED BOTH WAYS
+CAP feedback submissions Apr 2022 to Jan 2023,286,count,PRIMARY,MTI written reply Gan Kim Yong 6 Feb 2023,SOURCES.md item 2,VERIFIED
+CAP cases alleging GST misrepresentation,26,count,PRIMARY,MTI written reply Gan Kim Yong 6 Feb 2023,SOURCES.md item 2,VERIFIED
+Full pass-through 2023,0.9346%,1.08/1.07 minus 1,ARITHMETIC,none needed,03_passthrough.py header; checked in exact fractions,VERIFIED
+Full pass-through 2024,0.9259%,1.09/1.08 minus 1,ARITHMETIC,none needed,03_passthrough.py header; checked in exact fractions,VERIFIED
+Tax on a five dollar meal 2023,4.7 cents,5 x 0.009346,ARITHMETIC,none needed,inline computation,VERIFIED
+Tax on a five dollar meal both rises,9.3 cents,5 x (1.09/1.07 minus 1),ARITHMETIC,none needed,inline computation,VERIFIED
+January All Items range 2010-2026,-0.75% to +1.63%,month-on-month per cent,COMPUTED,raw CPI file,12_figures.py,VERIFIED
+January All Items standard deviation non-GST years,0.61%,month-on-month per cent,COMPUTED,raw CPI file,12_figures.py,VERIFIED
+January 2023 excess All Items,-0.02%,log points converted; difference under 0.005 at this scale,COMPUTED,raw CPI file,08_final_estimates.py,VERIFIED
+January 2023 excess 95 per cent interval,-1.42 to +1.39 per cent,prediction interval,COMPUTED,raw CPI file,08_final_estimates.py,VERIFIED
+Power of a single event,35 per cent,two-sided 5 per cent test,COMPUTED,placebo sd 0.590 log points,08_final_estimates.py,VERIFIED
+Events needed for 80 per cent power,4,standard power formula,COMPUTED,placebo sd 0.590 log points,08_final_estimates.py,VERIFIED
+Parallel trends pre-trend slope,+0.159 log points per month,OLS on 24 months,COMPUTED,raw CPI file,02_parallel_trends.py,VERIFIED
+Parallel trends p-value,7.0e-05,OLS,COMPUTED,raw CPI file,02_parallel_trends.py,VERIFIED
+Chinese New Year 2023,22 January,Gregorian,COMPUTED,lunardate package,12_figures.py and 07_cny_controlled.py; cross-checked against five known years,VERIFIED
+Chinese New Year 2024,10 February,Gregorian,COMPUTED,lunardate package,same,VERIFIED
+July 2007 All Items step,+1.82%,log points,COMPUTED,raw CPI file,08_final_estimates.py,VERIFIED
+July 2007 mechanical figure,1.89%,1.07/1.05 minus 1 in log points,ARITHMETIC,none needed,08_final_estimates.py,VERIFIED
+Housing share of the July 2007 step,63 per cent,weighted decomposition using 2019 weights,COMPUTED,ip-e61 weights plus raw CPI file,08_final_estimates.py,VERIFIED; weights are from the wrong era and the piece says so
+Water July 2017 change,+15.10%,month-on-month per cent,COMPUTED,raw CPI file,11_lownoise_placebo.py,VERIFIED
+Water July 2018 change,+14.70%,month-on-month per cent,COMPUTED,raw CPI file,11_lownoise_placebo.py,VERIFIED
+Water January 2023 change,+1.02%,month-on-month per cent,COMPUTED,raw CPI file,11_lownoise_placebo.py,VERIFIED
+Water January 2024 change,+0.97%,month-on-month per cent,COMPUTED,raw CPI file,11_lownoise_placebo.py,VERIFIED
+Water April 2024 change,+6.99%,month-on-month per cent,COMPUTED,raw CPI file,11_lownoise_placebo.py,VERIFIED
+Water April 2025 change,+10.46%,month-on-month per cent,COMPUTED,raw CPI file,11_lownoise_placebo.py,VERIFIED
+PUB previous revision 2017 next April 2024 and April 2025,dates,administrative,PRIMARY,PUB press release 27 September 2023,SOURCES.md item 19,VERIFIED
+PUB figures stated before GST,quoted,administrative,PRIMARY,PUB press release 27 September 2023,SOURCES.md item 19,VERIFIED
+Water unchanged in nine other Januaries,9,count of zero changes 2016-2026 excl 2023 and 2024,COMPUTED,raw CPI file,11_lownoise_placebo.py,VERIFIED
+Low-variance series count,32 of 162,selection rule sd below 0.465 log points,COMPUTED,raw CPI file,10_lownoise.py and 11_lownoise_placebo.py,VERIFIED
+Median excess non-GST Januaries,-0.01 log points,mean of yearly medians,COMPUTED,raw CPI file,11_lownoise_placebo.py,VERIFIED
+Median excess January 2023,+0.68 log points,median across the 32 series,COMPUTED,raw CPI file,11_lownoise_placebo.py,VERIFIED
+Median excess January 2024,+0.45 log points,median across the 32 series,COMPUTED,raw CPI file,11_lownoise_placebo.py,VERIFIED
+January 2023 distance from non-GST years,8.2 standard deviations,sd across yearly medians 0.083,COMPUTED,raw CPI file,11_lownoise_placebo.py,VERIFIED
+January 2024 distance from non-GST years,5.5 standard deviations,sd across yearly medians 0.083,COMPUTED,raw CPI file,11_lownoise_placebo.py,VERIFIED
+Polytechnic education January 2023 change,0.0000,month-on-month,COMPUTED,raw CPI file,11_lownoise_placebo.py,VERIFIED
+Government absorbs GST on subsidised education,policy,quoted,PRIMARY,MOF Goods and Services Tax policy page,SOURCES.md item 1,VERIFIED
+MAS 2023 core forecast including GST,3.5 to 4.5 per cent,published band,PRIMARY,MAS MPS 14 April 2023,SOURCES.md item 11,VERIFIED
+MAS 2023 core forecast excluding GST,2.5 to 3.5 per cent,published band,PRIMARY,MAS MPS 14 April 2023,SOURCES.md item 11,VERIFIED
+MTI 2024 forecast including GST,2.5 to 3.5 per cent,published band,PRIMARY,MTI CPD January 2024,SOURCES.md item 18,VERIFIED
+MTI 2024 forecast excluding GST,1.5 to 2.5 per cent,published band,PRIMARY,MTI CPD January 2024,SOURCES.md item 18,VERIFIED
+Exempt rent weight 2019 basket,1978 per 10000,actual plus imputed rentals,PRIMARY,SingStat ip-e61 Appendix III,cpi_weights.csv,VERIFIED; totals reconcile to 10000
+Exempt rent weight 2024 basket,2432 per 10000,actual plus imputed rentals,PRIMARY,SingStat ip-e61 Appendix III,cpi_weights.csv,VERIFIED; totals reconcile to 10000
+Full pass-through across the whole index,0.66 to 0.75 percentage points,0.9346 times liable share 70.21 to 80.22 per cent,COMPUTED,ip-e61 weights and IRAS exempt list,THESIS_ADDENDUM.md section 7,VERIFIED
+January 2024 year on year as published,2.9 per cent,2019 base,PRIMARY,MTI CPD January 2024,05_verify.py,VERIFIED
+January 2024 year on year on current series,3.11 per cent,2024 base,COMPUTED,raw CPI file,05_verify.py,VERIFIED
+Revision to January 2024 published rate,+0.21 percentage points,difference of the two above,COMPUTED,both,05_verify.py,VERIFIED
+2019-base dataset returns dataset not found,status,portal check,PRIMARY,data.gov.sg d_ba8a05c8908b5e1dc13540286d585f8a,checked 4 September 2026,VERIFIED
+MAS says 2023 pass-through was staggered across several months,quotation,verbatim,PRIMARY,MAS Macroeconomic Review October 2023 footnote 16,SOURCES.md item 22,VERIFIED
+MAS says 2024 full January pass-through is assumed under the baseline,quotation,verbatim,PRIMARY,MAS Macroeconomic Review October 2023 footnote 16,SOURCES.md item 22,VERIFIED
+MAS says full pass-through will occur over the course of 2023,quotation,verbatim,PRIMARY,MAS Macroeconomic Review April 2023 Chapter 4 footnote 1,SOURCES.md item 21,VERIFIED
+MAS says January 2023 pass-through was modest compared with 2007,quotation,verbatim,PRIMARY,MAS Macroeconomic Review April 2023 Chapter 4,SOURCES.md item 21,VERIFIED
+MAS says retailers absorbed the increase temporarily for three to six months,quotation,verbatim,PRIMARY,MAS Macroeconomic Review April 2023 section 3.2,SOURCES.md item 21,VERIFIED
+Cumulative excess through April 2023,+0.857 log points,cumulative from December CNY controlled,COMPUTED,raw CPI file,14_staggered.py,VERIFIED
+Cumulative excess through April placebo range,-1.903 to +1.974 log points,non-GST years 2010-2026,COMPUTED,raw CPI file,14_staggered.py,VERIFIED
+Cross-check observations compared,37881,all shared series and months,COMPUTED,both raw files,13_crosscheck_export.py,VERIFIED zero mismatches
+Polytechnic education January 2024 change,+0.1374 per cent,month-on-month,COMPUTED,raw CPI file,11_lownoise_placebo.py,VERIFIED
+Polytechnic education January 2024 as a share of statutory,0.15,0.1374 divided by 0.9259,ARITHMETIC,none needed,inline,VERIFIED
+Polytechnic education moves only in April otherwise,13 of 14 changes are April,series inspection 2015-2026,COMPUTED,raw CPI file,RESULTS.md section 6,VERIFIED

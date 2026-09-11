@@ -1,0 +1,4 @@
+out/
+figs/*.svg
+__pycache__/
+*.pyc
