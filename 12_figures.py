@@ -111,7 +111,7 @@ aria1 = (f"Dot plot of the month-on-month change in Singapore's All Items consum
 # everything the tax did not cause and see what is left.
 wj = jan_pct("Water Supply")
 wj = wj[(wj.index >= 2016) & (wj.index <= 2026)]
-W, H = 480, 320; L, R, T, B = 48, 18, 46, 228
+W, H = 480, 320; L, R, T, B = 58, 18, 46, 228
 ylo, yhi = -0.12, 1.25
 syw = lambda v: B - (v - ylo)/(yhi - ylo)*(B - T)
 bw = (W - L - R)/len(wj) * 0.5
@@ -138,7 +138,8 @@ for i, (y, v) in enumerate(wj.items()):
     rows.append(f'  <text class="lbl mut" fill="#717171" x="{X:.1f}" y="{B+20}" text-anchor="middle">{str(y)[2:]}</text>')
 rows.append(f'  <text class="lbl mut" fill="#717171" x="{L}" y="{T-22}">water supply price, change into each January</text>')
 rows.append(f'  <text class="lbl mut" fill="#717171" x="{L}" y="{B+52}">Nine Januaries at exactly zero. Two at the size of the tax.</text>')
-rows.append(f'  <text class="lbl mut" fill="#717171" x="{L}" y="{B+68}">PUB last revised the price in 2017, then in April 2024 and April 2025.</text>')
+rows.append(f'  <text class="lbl mut" fill="#717171" x="{L}" y="{B+68}">PUB last revised the price in 2017, then in April</text>')
+rows.append(f'  <text class="lbl mut" fill="#717171" x="{L}" y="{B+84}">2024 and April 2025.</text>')
 aria2 = ("Bar chart of the month-on-month change in Singapore's water supply consumer price index "
          "into each January from 2016 to 2026. Nine of the eleven Januaries show a change of exactly "
          "zero and are drawn as flat ticks on the baseline. The two exceptions are January 2023 at "

@@ -43,6 +43,9 @@ for s in "${SCRIPTS[@]}"; do
   python3 "${s}"
 done
 
+echo "=== tools/check_figure_overflow.py (DejaVu Sans, needs playwright + chromium) ==="
+python3 tools/check_figure_overflow.py figs/fig1-signal-vs-noise.svg figs/fig2-water-supply.svg figs/fig3-still-prices.svg
+
 # 13 needs the second raw file, which is a check rather than an input. Skip it if
 # that file is absent rather than failing the whole run.
 if [[ -f raw/cpi_2024base_monthly_tablebuilder.csv ]]; then
