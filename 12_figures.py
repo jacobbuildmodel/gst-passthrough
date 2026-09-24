@@ -6,6 +6,15 @@ Theme-aware via CSS custom properties with literal fallbacks. Responsive via
 viewBox with no fixed width. Every figure carries a full aria-label describing what
 it shows and what the numbers are, so it is readable without sight of it.
 Titles live in the article caption, not inside the image, per Part E.
+
+Phase 3 (shared cross-repo figure tokens): same rename as hdb-affordability's
+07_figures.py and coe-analysis's 09_figures.py -- --fg/--muted/--faint/--grid/--accent
+become --fig-ink/--fig-ink-3/--fig-context/--fig-rule/--fig-subject, and the hex values
+become the shared palette (verified WCAG AA against both surfaces, light 4.6-4.8:1,
+dark 4.7-4.9:1, worst-case CVD deltaE > 90). Canvas shrunk 640x300 -> 480x(300-320)
+and base text 11px -> 14px, measured 6.2-6.4px effective at 390px before -> 11.4px+
+after. Every label's wording is unchanged -- only position, size and line-wrapping
+moved.
 """
 import numpy as np, pandas as pd, pathlib
 
@@ -37,17 +46,21 @@ def jan_log(s):
     return pd.Series(o).sort_index()
 
 STYLE = """<style>
-    :root{--fg:#1c1c1c;--muted:#767676;--faint:#c8c8c8;--grid:#e6e6e6;--accent:#0b6bcb;}
+    :root{--fig-ink:#0b0b0b;--fig-ink-2:#52514e;--fig-ink-3:#717171;--fig-rule:#e2e1dd;
+      --fig-surface:#fcfcfa;--fig-subject:#2873ce;--fig-context:#707379;}
     @media (prefers-color-scheme: dark){
-      :root{--fg:#ececec;--muted:#9a9a9a;--faint:#565656;--grid:#3a3a3a;--accent:#5aa9f0;}
+      :root{--fig-ink:#ffffff;--fig-ink-2:#c3c2b7;--fig-ink-3:#9a9a9a;--fig-rule:#38393a;
+        --fig-surface:#1a1a19;--fig-subject:#3987e5;--fig-context:#93969c;}
     }
-    .fg{fill:var(--fg,#1c1c1c)} .mut{fill:var(--muted,#767676)}
-    .lbl{font:11px system-ui,-apple-system,Segoe UI,Roboto,sans-serif}
-    .lbl-b{font:600 11px system-ui,-apple-system,Segoe UI,Roboto,sans-serif}
-    .grid{stroke:var(--grid,#e6e6e6);stroke-width:1;fill:none}
-    .axis{stroke:var(--muted,#767676);stroke-width:1;fill:none}
-    .ctx{fill:var(--faint,#c8c8c8)} .ctxs{stroke:var(--faint,#c8c8c8)}
-    .acc{fill:var(--accent,#0b6bcb)} .accs{stroke:var(--accent,#0b6bcb)}
+    :root[data-theme="dark"]{--fig-ink:#ffffff;--fig-ink-2:#c3c2b7;--fig-ink-3:#9a9a9a;
+      --fig-rule:#38393a;--fig-surface:#1a1a19;--fig-subject:#3987e5;--fig-context:#93969c;}
+    text{font-family:ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;}
+    .fg{fill:var(--fig-ink,#0b0b0b)} .mut{fill:var(--fig-ink-3,#717171)}
+    .lbl{font-size:14px} .lbl-b{font-size:14px;font-weight:600}
+    .grid{stroke:var(--fig-rule,#e2e1dd);stroke-width:1;fill:none}
+    .axis{stroke:var(--fig-ink-3,#717171);stroke-width:1;fill:none}
+    .ctx{fill:var(--fig-context,#707379)} .ctxs{stroke:var(--fig-context,#707379)}
+    .acc{fill:var(--fig-subject,#2873ce)} .accs{stroke:var(--fig-subject,#2873ce)}
   </style>"""
 
 def svg(vb_w, vb_h, aria, body):
@@ -57,30 +70,31 @@ def svg(vb_w, vb_h, aria, body):
 
 # ---------- Figure 1: the tax against ordinary January variation ----------
 g = jan_pct("All Items"); g = g[(g.index >= 2010) & (g.index <= 2026)]
-W, H = 640, 300; L, R, T = 46, 24, 34
+W, H = 480, 320; L, R, T = 42, 20, 40
+B = 208
 x0, x1 = -1.0, 1.8
 sx = lambda v: L + (v - x0)/(x1 - x0)*(W - L - R)
 rows = []
-rows.append(f'  <line class="axis" stroke="#767676" x1="{L}" y1="200" x2="{W-R}" y2="200"/>')
+rows.append(f'  <line class="axis" stroke="#717171" x1="{L}" y1="{B}" x2="{W-R}" y2="{B}"/>')
 for t in np.arange(-1.0, 1.81, 0.5):
     X = sx(t)
-    rows.append(f'  <line class="grid" stroke="#e6e6e6" x1="{X:.1f}" y1="{T}" x2="{X:.1f}" y2="200"/>')
-    rows.append(f'  <text class="lbl mut" fill="#767676" x="{X:.1f}" y="216" text-anchor="middle">{t:+.1f}%</text>')
+    rows.append(f'  <line class="grid" stroke="#e2e1dd" x1="{X:.1f}" y1="{T}" x2="{X:.1f}" y2="{B}"/>')
+    rows.append(f'  <text class="lbl mut" fill="#717171" x="{X:.1f}" y="{B+20}" text-anchor="middle" font-variant-numeric="tabular-nums">{t:+.1f}%</text>')
 placed = {}
 for y, v in g.items():
     X = sx(v); band = round(X/16)
     k = placed.get(band, 0); placed[band] = k + 1
-    Y = 190 - k*15
+    Y = B - 10 - k*16
     gst = y in GST_JAN
     cls = "acc" if gst else "ctx"
-    rows.append(f'  <circle class="{cls}" fill="{"#0b6bcb" if gst else "#c8c8c8"}" cx="{X:.1f}" cy="{Y}" r="{4.5 if gst else 3.5}"/>')
+    rows.append(f'  <circle class="{cls}" fill="{"#2873ce" if gst else "#707379"}" cx="{X:.1f}" cy="{Y}" r="{4.5 if gst else 3.5}"/>')
     if gst:
-        rows.append(f'  <text class="lbl-b acc" fill="#0b6bcb" x="{X:.1f}" y="{Y-9}" text-anchor="middle">{y}</text>')
+        rows.append(f'  <text class="lbl-b acc" fill="#2873ce" x="{X:.1f}" y="{Y-10}" text-anchor="middle">{y}</text>')
 bx0, bx1 = sx(0), sx(TGT23)
-rows.append(f'  <line class="accs" stroke="#0b6bcb" x1="{bx0:.1f}" y1="246" x2="{bx1:.1f}" y2="246" stroke-width="7"/>')
-rows.append(f'  <text class="lbl-b acc" fill="#0b6bcb" x="{bx1+8:.1f}" y="250">the whole 2023 tax rise, {TGT23:.2f}%</text>')
-rows.append(f'  <text class="lbl mut" fill="#767676" x="{L}" y="{T-14}">each dot is one January, All Items index, 2010 to 2026</text>')
-rows.append(f'  <text class="lbl mut" fill="#767676" x="{L}" y="272">month-on-month change into January</text>')
+rows.append(f'  <line class="accs" stroke="#2873ce" x1="{bx0:.1f}" y1="{B+44}" x2="{bx1:.1f}" y2="{B+44}" stroke-width="8"/>')
+rows.append(f'  <text class="lbl-b acc" fill="#2873ce" x="{L}" y="{B+66}">the whole 2023 tax rise, {TGT23:.2f}%</text>')
+rows.append(f'  <text class="lbl mut" fill="#717171" x="{L}" y="{T-18}">each dot is one January, All Items index, 2010 to 2026</text>')
+rows.append(f'  <text class="lbl mut" fill="#717171" x="{L}" y="{B+90}">month-on-month change into January</text>')
 aria1 = (f"Dot plot of the month-on-month change in Singapore's All Items consumer price index "
          f"into each January from 2010 to 2026. The values range from minus 0.75 per cent in 2025 "
          f"to plus 1.63 per cent in 2011, with a standard deviation of 0.61 per cent across the "
@@ -97,34 +111,34 @@ aria1 = (f"Dot plot of the month-on-month change in Singapore's All Items consum
 # everything the tax did not cause and see what is left.
 wj = jan_pct("Water Supply")
 wj = wj[(wj.index >= 2016) & (wj.index <= 2026)]
-W, H = 640, 300; L, R, T, B = 54, 22, 40, 218
+W, H = 480, 320; L, R, T, B = 48, 18, 46, 228
 ylo, yhi = -0.12, 1.25
 syw = lambda v: B - (v - ylo)/(yhi - ylo)*(B - T)
 bw = (W - L - R)/len(wj) * 0.5
 rows = []
 for t in [0.0, 0.25, 0.5, 0.75, 1.0, 1.25]:
     Y = syw(t)
-    rows.append(f'  <line class="grid" stroke="#e6e6e6" x1="{L}" y1="{Y:.1f}" x2="{W-R}" y2="{Y:.1f}"/>')
-    rows.append(f'  <text class="lbl mut" fill="#767676" x="{L-8}" y="{Y+4:.1f}" text-anchor="end">{t:.2f}%</text>')
+    rows.append(f'  <line class="grid" stroke="#e2e1dd" x1="{L}" y1="{Y:.1f}" x2="{W-R}" y2="{Y:.1f}"/>')
+    rows.append(f'  <text class="lbl mut" fill="#717171" x="{L-8}" y="{Y+4:.1f}" text-anchor="end" font-variant-numeric="tabular-nums">{t:.2f}%</text>')
 YT = syw(TGT23)
-rows.append(f'  <line class="accs" stroke="#0b6bcb" x1="{L}" y1="{YT:.1f}" x2="{W-R}" y2="{YT:.1f}" stroke-width="1.5"/>')
-rows.append(f'  <text class="lbl-b acc" fill="#0b6bcb" x="{L}" y="{YT-7:.1f}">what the tax alone should add, 0.93%</text>')
-rows.append(f'  <line class="axis" stroke="#767676" x1="{L}" y1="{syw(0):.1f}" x2="{W-R}" y2="{syw(0):.1f}"/>')
+rows.append(f'  <line class="accs" stroke="#2873ce" x1="{L}" y1="{YT:.1f}" x2="{W-R}" y2="{YT:.1f}" stroke-width="1.5"/>')
+rows.append(f'  <text class="lbl-b acc" fill="#2873ce" x="{L}" y="{YT-8:.1f}">what the tax alone should add, 0.93%</text>')
+rows.append(f'  <line class="axis" stroke="#717171" x1="{L}" y1="{syw(0):.1f}" x2="{W-R}" y2="{syw(0):.1f}"/>')
 for i, (y, v) in enumerate(wj.items()):
     X = L + (i + 0.5)*(W - L - R)/len(wj)
     gst = y in GST_JAN
     if abs(v) < 1e-9:
-        rows.append(f'  <line class="ctxs" stroke="#c8c8c8" x1="{X-bw/2:.1f}" y1="{syw(0):.1f}" '
+        rows.append(f'  <line class="ctxs" stroke="#707379" x1="{X-bw/2:.1f}" y1="{syw(0):.1f}" '
                     f'x2="{X+bw/2:.1f}" y2="{syw(0):.1f}" stroke-width="2.5"/>')
     else:
-        rows.append(f'  <rect class="{"acc" if gst else "ctx"}" fill="{"#0b6bcb" if gst else "#c8c8c8"}" '
+        rows.append(f'  <rect class="{"acc" if gst else "ctx"}" fill="{"#2873ce" if gst else "#707379"}" '
                     f'x="{X-bw/2:.1f}" y="{syw(v):.1f}" width="{bw:.1f}" height="{syw(0)-syw(v):.1f}"/>')
-        rows.append(f'  <text class="lbl-b acc" fill="#0b6bcb" x="{X:.1f}" y="{syw(v)-7:.1f}" '
+        rows.append(f'  <text class="lbl-b acc" fill="#2873ce" x="{X:.1f}" y="{syw(v)-8:.1f}" '
                     f'text-anchor="middle">{v:.2f}%</text>')
-    rows.append(f'  <text class="lbl mut" fill="#767676" x="{X:.1f}" y="{B+18}" text-anchor="middle">{str(y)[2:]}</text>')
-rows.append(f'  <text class="lbl mut" fill="#767676" x="{L}" y="{T-18}">water supply price, change into each January</text>')
-rows.append(f'  <text class="lbl mut" fill="#767676" x="{L}" y="{B+48}">Nine Januaries at exactly zero. Two at the size of the tax.</text>')
-rows.append(f'  <text class="lbl mut" fill="#767676" x="{L}" y="{B+64}">PUB last revised the price in 2017, then in April 2024 and April 2025.</text>')
+    rows.append(f'  <text class="lbl mut" fill="#717171" x="{X:.1f}" y="{B+20}" text-anchor="middle">{str(y)[2:]}</text>')
+rows.append(f'  <text class="lbl mut" fill="#717171" x="{L}" y="{T-22}">water supply price, change into each January</text>')
+rows.append(f'  <text class="lbl mut" fill="#717171" x="{L}" y="{B+52}">Nine Januaries at exactly zero. Two at the size of the tax.</text>')
+rows.append(f'  <text class="lbl mut" fill="#717171" x="{L}" y="{B+68}">PUB last revised the price in 2017, then in April 2024 and April 2025.</text>')
 aria2 = ("Bar chart of the month-on-month change in Singapore's water supply consumer price index "
          "into each January from 2016 to 2026. Nine of the eleven Januaries show a change of exactly "
          "zero and are drawn as flat ticks on the baseline. The two exceptions are January 2023 at "
@@ -147,28 +161,30 @@ for y in range(2010, 2027):
         if len(base) < 8 or base.std(ddof=1) >= CUT: continue
         e.append(gg.loc[y] - base.mean())
     if e: med[y] = float(np.median(e))
-W, H = 640, 300; L, R, T, B = 52, 20, 34, 232
+W, H = 480, 320; L, R, T, B = 46, 16, 54, 236
 mlo, mhi = -0.35, 0.80
 syb = lambda v: B - (v - mlo)/(mhi - mlo)*(B - T)
 bw = (W - L - R)/len(med) * 0.62
 rows = []
 for t in [-0.2, 0.0, 0.2, 0.4, 0.6, 0.8]:
     Y = syb(t)
-    rows.append(f'  <line class="grid" stroke="#e6e6e6" x1="{L}" y1="{Y:.1f}" x2="{W-R}" y2="{Y:.1f}"/>')
-    rows.append(f'  <text class="lbl mut" fill="#767676" x="{L-8}" y="{Y+4:.1f}" text-anchor="end">{t:+.1f}</text>')
-rows.append(f'  <line class="axis" stroke="#767676" x1="{L}" y1="{syb(0):.1f}" x2="{W-R}" y2="{syb(0):.1f}"/>')
+    rows.append(f'  <line class="grid" stroke="#e2e1dd" x1="{L}" y1="{Y:.1f}" x2="{W-R}" y2="{Y:.1f}"/>')
+    rows.append(f'  <text class="lbl mut" fill="#717171" x="{L-8}" y="{Y+4:.1f}" text-anchor="end" font-variant-numeric="tabular-nums">{t:+.1f}</text>')
+rows.append(f'  <line class="axis" stroke="#717171" x1="{L}" y1="{syb(0):.1f}" x2="{W-R}" y2="{syb(0):.1f}"/>')
 for i, (y, v) in enumerate(sorted(med.items())):
     X = L + (i + 0.5)*(W - L - R)/len(med)
     Y0, Y1 = syb(0), syb(v)
     gst = y in GST_JAN
-    rows.append(f'  <rect class="{"acc" if gst else "ctx"}" fill="{"#0b6bcb" if gst else "#c8c8c8"}" '
+    rows.append(f'  <rect class="{"acc" if gst else "ctx"}" fill="{"#2873ce" if gst else "#707379"}" '
                 f'x="{X-bw/2:.1f}" y="{min(Y0,Y1):.1f}" width="{bw:.1f}" height="{abs(Y1-Y0):.1f}"/>')
     if gst:
-        rows.append(f'  <text class="lbl-b acc" fill="#0b6bcb" x="{X:.1f}" y="{Y1-6:.1f}" text-anchor="middle">{y}</text>')
+        rows.append(f'  <text class="lbl-b acc" fill="#2873ce" x="{X:.1f}" y="{Y1-8:.1f}" text-anchor="middle">{y}</text>')
     if y % 2 == 0:
-        rows.append(f'  <text class="lbl mut" fill="#767676" x="{X:.1f}" y="{B+18}" text-anchor="middle">{str(y)[2:]}</text>')
-rows.append(f'  <text class="lbl mut" fill="#767676" x="{L}" y="{T-14}">median excess January move in log points, the 32 prices that otherwise hold still</text>')
-rows.append(f'  <text class="lbl mut" fill="#767676" x="{L}" y="{B+50}">Every other January averages -0.01. The two GST years are +0.68 and +0.45.</text>')
+        rows.append(f'  <text class="lbl mut" fill="#717171" x="{X:.1f}" y="{B+20}" text-anchor="middle">{str(y)[2:]}</text>')
+rows.append(f'  <text class="lbl mut" fill="#717171" x="{L}" y="16">median excess January move in log points,</text>')
+rows.append(f'  <text class="lbl mut" fill="#717171" x="{L}" y="34">the 32 prices that otherwise hold still</text>')
+rows.append(f'  <text class="lbl mut" fill="#717171" x="{L}" y="{B+52}">Every other January averages -0.01.</text>')
+rows.append(f'  <text class="lbl mut" fill="#717171" x="{L}" y="{B+70}">The two GST years are +0.68 and +0.45.</text>')
 aria3 = ("Bar chart of the median excess January price move, in log points, among the 32 consumer "
          "price index series whose January movement is otherwise very small, for each year from 2010 "
          "to 2026. Every non-GST year lies between minus 0.19 and plus 0.16, averaging minus 0.01 with "
