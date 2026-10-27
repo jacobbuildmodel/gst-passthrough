@@ -1,0 +1,18 @@
+# The piece in this repository, for jacobbuildmodel/research-checks
+# (.github/workflows/research-checks.yml): tier (i) seal integrity and the
+# purpose gate, tier (ii) the committed checksums.
+
+[pieces.gst]
+dir = "."
+
+[pieces.gst.seal]
+kind = "header"
+thesis = "strict"          # THESIS.md: "Invariant A2 says this file is not edited afterwards"
+commit = "33fdecdd1e3ff8bc29586e8de616d71d63a73963"
+why = "THESIS.md moved to the root in 33fdecd, byte for byte as committed in 105fda1, this repository's first commit with it; written 4 September 2026, before any data file was downloaded"
+recorded_md5 = "b26865e1175f0904e5476c50412f44ef"   # THESIS.md's line in CHECKSUMS.md5
+
+[pieces.gst.fast]
+# The INPUTS half of CHECKSUMS.md5: raw data, scripts and prose. The OUTPUTS
+# half is gitignored and needs a rebuild (run_all.sh), which this tier does not do.
+manifest = "sed -n '/^# ---- INPUTS/,/^# ---- OUTPUTS/p' CHECKSUMS.md5 | grep -E '^[0-9a-f]{32}  ' | md5sum -c -"
