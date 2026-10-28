@@ -1,0 +1,25 @@
+# Seal integrity, the purpose gate and the committed input checksums, from
+# jacobbuildmodel/research-checks. No AI, no secrets. Settings and reasons:
+# .github/research-checks.toml.
+#
+# research-checks is pinned by the same full sha in uses: and checks_sha.
+name: research-checks
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  seal:
+    uses: jacobbuildmodel/research-checks/.github/workflows/seal.yml@ace085dfd6fc8dce9962df39fefd5bdb8d3a3403
+    with:
+      checks_sha: ace085dfd6fc8dce9962df39fefd5bdb8d3a3403
+
+  fast:
+    uses: jacobbuildmodel/research-checks/.github/workflows/fast.yml@ace085dfd6fc8dce9962df39fefd5bdb8d3a3403
+    with:
+      checks_sha: ace085dfd6fc8dce9962df39fefd5bdb8d3a3403
