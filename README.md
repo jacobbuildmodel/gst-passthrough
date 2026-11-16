@@ -10,11 +10,10 @@ pre-registered thesis written before any data was read.
 ## Status as of 16 November 2026
 
 ANALYSIS COMPLETE. The article is published:
-[Water bills show about the full GST rise. The national price index cannot see it.](https://jacobbuildmodel.github.io/economics/2026-09-08/)
+[GST pass-through, 8 September 2026](https://jacobbuildmodel.github.io/economics/2026-09-08/)
 See `RESULTS.md` for the findings. The copy kept here, `2026-09-08.md`, is the draft as
-first written, with an earlier title, and still carries `draft: true`. The published text
-differs from it in the title, one sentence and the figure addresses; where they differ,
-quote the site.
+first written, with an earlier title, and still carries `draft: true`. The published
+article has been revised since; where they differ, quote the site.
 
 Headline result: the aggregate index cannot detect a rate change this small. The
 signal is 0.93 log points against 0.59 of January noise, giving 35 per cent power
