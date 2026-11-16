@@ -10,7 +10,7 @@ pre-registered thesis written before any data was read.
 ## Status as of 16 November 2026
 
 ANALYSIS COMPLETE. The article is published:
-[GST pass-through, 8 September 2026](https://jacobbuildmodel.github.io/economics/2026-09-08/)
+[GST pass-through, 8 September 2026](https://jacobbuildmodel.github.io/economics/2026-09-08/).
 See `RESULTS.md` for the findings. The copy kept here, `2026-09-08.md`, is the draft as
 first written, with an earlier title, and still carries `draft: true`. The published
 article has been revised since; where they differ, quote the site.
