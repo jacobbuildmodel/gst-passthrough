@@ -7,10 +7,14 @@ Analysis directory for a piece on jacobbuildmodel.github.io. Companion to
 a fixed raw snapshot rather than a live mirror, published MD5 checksums, and a
 pre-registered thesis written before any data was read.
 
-## Status as of 8 September 2026
+## Status as of 16 November 2026
 
-ANALYSIS COMPLETE. Article drafted, `draft: true`. See `RESULTS.md` for the findings
-and `2026-09-08.md` for the piece.
+ANALYSIS COMPLETE. The article is published:
+[Water bills show about the full GST rise. The national price index cannot see it.](https://jacobbuildmodel.github.io/economics/2026-09-08/)
+See `RESULTS.md` for the findings. The copy kept here, `2026-09-08.md`, is the draft as
+first written, with an earlier title, and still carries `draft: true`. The published text
+differs from it in the title, one sentence and the figure addresses; where they differ,
+quote the site.
 
 Headline result: the aggregate index cannot detect a rate change this small. The
 signal is 0.93 log points against 0.59 of January noise, giving 35 per cent power
@@ -86,7 +90,7 @@ no number in the article comes from them.
     THESIS.md                     pre-registration, sealed 4 September 2026, not edited
     THESIS_ADDENDUM.md            everything learned after the seal, per A2
     RESULTS.md                    the findings, and what may and may not be claimed
-    2026-09-08.md                 the article, draft: true
+    2026-09-08.md                 the first draft of the article, draft: true
     HANDOVER.md                   brief for the website chat
     INSPIRATION.md                the Part F technique pass
     number_manifest.csv           every figure in the prose, its source and its script
@@ -146,3 +150,15 @@ the 2023 Household Expenditure Survey.
 Whether that reweighting took effect in January 2024, the same month as the second
 rate change, or in January 2025, a year clear of it, is unresolved and is the single
 biggest threat to the 2024 estimate. It is listed as conditional request C2.
+
+## Licence
+
+- **Code** (the `.py` and `.sh` scripts) is under the MIT licence: see `LICENSE`.
+- **Text and figures** (the article draft, write-ups and charts) are under
+  [Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/) (CC BY 4.0).
+  Credit "Jacob Ong, The New Void Deck".
+- **Data and third-party files** are covered by neither licence. `raw/cpi_2024base_monthly.csv`
+  comes from data.gov.sg under the
+  [Singapore Open Data Licence](https://data.gov.sg/open-data-licence), as `raw/RETRIEVED.txt`
+  records. The SingStat TableBuilder export beside it, other source files and the DejaVu
+  fonts in `tools/` keep their sources' own terms.
