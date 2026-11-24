@@ -1,0 +1,21 @@
+# Citation metadata for this repository. GitHub reads this file for the
+# "Cite this repository" button.
+cff-version: 1.2.0
+message: "If you use this data or code, please cite it as below."
+type: software
+title: "GST pass-through"
+authors:
+  - family-names: Ong
+    given-names: Jacob
+repository-code: "https://github.com/jacobbuildmodel/gst-passthrough"
+license: MIT
+abstract: >-
+  Data and code behind the articles on The New Void Deck
+  (https://jacobbuildmodel.github.io) on where the 2023 and 2024 GST rises showed up in consumer prices.
+  Each article's own page gives its citation.
+keywords:
+  - Singapore
+  - GST
+  - consumer prices
+  - tax pass-through
+  - public policy
